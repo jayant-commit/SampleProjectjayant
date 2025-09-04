@@ -180,7 +180,7 @@ node {
 
 
             // -------------------------------------------------------------------------
-            // Delete package install scratch org.
+            // Delete package install scratch
             // -------------------------------------------------------------------------
 
             stage('Delete Package Install Scratch Org') {
