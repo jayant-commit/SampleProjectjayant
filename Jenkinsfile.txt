@@ -46,7 +46,7 @@ node {
 
 
             // -------------------------------------------------------------------------
-            // Create new scratch org to test your code.
+            // Create new scratch org to test your code. Test
             // -------------------------------------------------------------------------
 
             stage('Create Test Scratch Org') {
