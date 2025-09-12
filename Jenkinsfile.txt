@@ -33,13 +33,11 @@ node {
 
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
 
+           // -------------------------------------------------------------------------
+            // Authorize Dev Hub Org with JWT key and set alias 'my-hub-org'
             // -------------------------------------------------------------------------
-            // Authorize the Dev Hub org with JWT key and give it an alias.
-            // -------------------------------------------------------------------------
-
             stage('Authorize DevHub') {
-
-                rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --set-default-dev-hub --setalias my-hub-org"
+                def rc = command("${toolbelt} org login jwt --instance-url ${SF_INSTANCE_URL} --client-id ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwt-key-file ${SERVER_KEY_FILE} --set-default-dev-hub --alias my-hub-org")
                 if (rc != 0) {
                     error 'Salesforce dev hub org authorization failed.'
                 }
