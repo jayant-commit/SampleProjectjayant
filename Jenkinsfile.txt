@@ -43,13 +43,11 @@ node {
                 }
             }
 
-
             // -------------------------------------------------------------------------
-            // Create new scratch org to test your code. Test
+            // Create Scratch Org for testing
             // -------------------------------------------------------------------------
-
             stage('Create Test Scratch Org') {
-                rc = command "${toolbelt} org create scratch --target-dev-hub my-hub-org --set-default --definition-file config/project-scratch-def.json --alias ciorg --wait 10 --duration-days 1"
+                def rc = command("${toolbelt} org create scratch --target-dev-hub my-hub-org --set-default --definition-file config/project-scratch-def.json --alias ciorg --wait 10 --duration-days 1")
                 if (rc != 0) {
                     error 'Salesforce test scratch org creation failed.'
                 }
