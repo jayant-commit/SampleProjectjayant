@@ -11,7 +11,7 @@ node {
     def PACKAGE_NAME='0Ho1U000000CaUzSAK'
     def PACKAGE_VERSION
     def SF_INSTANCE_URL = env.SF_INSTANCE_URL ?: "https://login.salesforce.com"
-    def setalias = 'my-hub-org'
+
 
     def toolbelt = tool 'toolbelt'
 
@@ -39,9 +39,19 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Authorize DevHub') {
-                rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --set-default-dev-hub --setalias my-hub-org"
+                rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --set-default-dev-hub --alias my-hub-org"
                 if (rc != 0) {
                     error 'Salesforce dev hub org authorization failed.'
+                }
+            }
+
+             // List all the Orgs
+
+
+            stage('Debug: List Authorized Orgs') {
+            def rc = command "${toolbelt}/sf org list --all"
+            if (rc != 0) {
+            error 'Failed to list authorized orgs.'
                 }
             }
 
