@@ -49,7 +49,7 @@ node {
 
 
             stage('Debug: List Authorized Orgs') {
-            def rc = command "${toolbelt}/sf org list --all"
+            def rc = command "${toolbelt} sf org list --all"
             if (rc != 0) {
             error 'Failed to list authorized orgs.'
                 }
