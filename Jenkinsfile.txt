@@ -44,12 +44,13 @@ node {
                     error 'Salesforce dev hub org authorization failed.'
                 }
             }
-
+             // -----------------------
              // List all the Orgs
+             // ------------------------
 
 
             stage('Debug: List Authorized Orgs') {
-            def rc = command "${toolbelt} sf org list --all"
+            rc = command "${toolbelt} sf org list --all"
             if (rc != 0) {
             error 'Failed to list authorized orgs.'
                 }
